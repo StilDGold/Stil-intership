@@ -5,19 +5,27 @@ import Landing from "../components/home/Landing";
 import LandingIntro from "../components/home/LandingIntro";
 import NewItems from "../components/home/NewItems";
 import TopSellers from "../components/home/TopSellers";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
-const Home = () => {
+
+const Home = ( {elems, isLoading} ) => {
+  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+
+ 
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
         <Landing />
         <LandingIntro />
-        <HotCollections />
+        <HotCollections elems={elems} isLoading={isLoading}/>
         <NewItems />
         <TopSellers />
         <BrowseByCategory />

@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import nftImage from "../images/nftImage.jpg";
+import axios from "axios";
 
-const ItemDetails = () => {
+const ItemDetails = ( {elems} ) => {
+ const { id } = useParams()
+ const elem = elems.find(elem => +elem.id === +id) 
+  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+ 
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -18,14 +24,14 @@ const ItemDetails = () => {
             <div className="row">
               <div className="col-md-6 text-center">
                 <img
-                  src={nftImage}
+                  src={elem.nftImage}
                   className="img-fluid img-rounded mb-sm-30 nft-image"
                   alt=""
                 />
               </div>
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>Rainbow Style #194</h2>
+                  <h2>{elem.title}</h2>
 
                   <div className="item_info_counts">
                     <div className="item_info_views">
@@ -48,7 +54,7 @@ const ItemDetails = () => {
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to="/author">
-                            <img className="lazy" src={AuthorImage} alt="" />
+                            <img className="lazy" src={elem.authorImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
@@ -65,7 +71,7 @@ const ItemDetails = () => {
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to="/author">
-                            <img className="lazy" src={AuthorImage} alt="" />
+                            <img className="lazy" src={elem.authorImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
