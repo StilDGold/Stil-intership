@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import AuthorImage from "../../images/author_thumbnail.jpg";
+import nftImage from "../../images/nftImage.jpg";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
@@ -6,11 +9,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../dynamicstyle.css";
 import Slider from "react-slick";
+import Skeleton from "../UI/Skeleton";
 import HotCollectionsDynamic from "../../DynamicComponents/HotCollectionsDynamic";
-
-const HotCollections = () => {
+const HotCollections = ({  width, height, borderRadius }) => {
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -70,7 +73,7 @@ const HotCollections = () => {
           </div>
           <Slider {...settings}>
             {elems.map((elem) => (
-              <HotCollectionsDynamic elem={elem} isLoading={isLoading}/>
+              <HotCollectionsDynamic elem={elem} key={elem.id} isLoading={isLoading}/>
             ))}
           </Slider>
         </div>
