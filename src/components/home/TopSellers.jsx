@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const TopSellers = () => {
+const TopSellers = ({ sellers, isLoading }) => {
   return (
     <section id="section-popular" className="pb-5">
       <div className="container">
@@ -15,24 +17,46 @@ const TopSellers = () => {
           </div>
           <div className="col-md-12">
             <ol className="author_list">
-              {new Array(12).fill(0).map((_, index) => (
-                <li key={index}>
-                  <div className="author_list_pp">
-                    <Link to="/author">
-                      <img
-                        className="lazy pp-author"
-                        src={AuthorImage}
-                        alt=""
-                      />
-                      <i className="fa fa-check"></i>
-                    </Link>
-                  </div>
-                  <div className="author_list_info">
-                    <Link to="/author">Monica Lucas</Link>
-                    <span>2.1 ETH</span>
-                  </div>
-                </li>
-              ))}
+              {sellers.map((seller) => {
+                return (
+                  <li key={seller.id}>
+                    {isLoading ? (
+                      <Skeleton circle width={50} height={50} />
+                    ) : (
+                      <div className="author_list_pp">
+                        <Link
+                          to={`/author/${seller.authorId}`}
+                          onClick={() => {
+                            window.scroll(0, 0);
+                          }}
+                        >
+                          <img
+                            className="lazy pp-author"
+                            src={seller.authorImage}
+                            alt=""
+                          />
+                          <i className="fa fa-check"></i>
+                        </Link>
+                      </div>
+                    )}
+                    {isLoading ? (
+                      <Skeleton count={2} />
+                    ) : (
+                      <div className="author_list_info">
+                        <Link
+                          to={`/author/${seller.authorId}`}
+                          onClick={() => {
+                            window.scroll(0, 0);
+                          }}
+                        >
+                          {seller.authorName}
+                        </Link>
+                        <span>{seller.price} ETH</span>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ol>
           </div>
         </div>
