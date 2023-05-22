@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import SubHeader from "../images/subheader.jpg";
 import ExploreItems from "../components/explore/ExploreItems";
 
-const Explore = () => {
+const Explore = ({ nfts, isLoading }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -32,7 +32,7 @@ const Explore = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              <ExploreItems />
+                <ExploreItems nfts={nfts} isLoading={isLoading}/>
             </div>
           </div>
         </section>
