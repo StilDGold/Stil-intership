@@ -7,7 +7,7 @@ import nftImage from "../images/nftImage.jpg";
 const ItemDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    // 
+    // from main - test
   }, []);
 
   return (
