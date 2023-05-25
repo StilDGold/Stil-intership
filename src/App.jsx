@@ -5,19 +5,47 @@ import Author from "./pages/Author";
 import ItemDetails from "./pages/ItemDetails";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
+  const [nfts, setExplore] = useState([]);
+
+  async function fetchData() {
+    const exploreItems = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
+    );
+
+    axios.all([exploreItems]).then(
+      axios.spread((...allData) => {
+        const allDataExplore = allData[0].data;
+        setExplore(allDataExplore);
+      })
+    );
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/author" element={<Author />} />
-        <Route path="/item-details" element={<ItemDetails />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <SkeletonTheme>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/explore" element={<Explore nfts={nfts} />} />
+          <Route path="/author/:authorId" element={<Author />} />
+          <Route
+            path="/item-details/:nftId"
+            element={<ItemDetails nfts={nfts} />}
+          />
+        </Routes>
+        <Footer />
+      </Router>
+    </SkeletonTheme>
   );
 }
 

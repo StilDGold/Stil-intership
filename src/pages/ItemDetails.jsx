@@ -3,8 +3,13 @@ import EthImage from "../images/ethereum.svg";
 import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import nftImage from "../images/nftImage.jpg";
+import { useParams } from "react-router-dom";
 
-const ItemDetails = () => {
+const ItemDetails = ({nfts}) => {
+  const { nftId } = useParams()
+  const item = nfts.find(item => +item.nftId === +nftId)
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -25,7 +30,7 @@ const ItemDetails = () => {
               </div>
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>Rainbow Style #194</h2>
+                  <h2>{item.title}</h2>
 
                   <div className="item_info_counts">
                     <div className="item_info_views">
