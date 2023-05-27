@@ -5,19 +5,26 @@ import Author from "./pages/Author";
 import ItemDetails from "./pages/ItemDetails";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function App() {
+  AOS.init();
   return (
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/author" element={<Author />} />
-        <Route path="/item-details" element={<ItemDetails />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <SkeletonTheme>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/author/:authorId" element={<Author />} />
+          <Route path="/item-details/:nftId" element={<ItemDetails />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </SkeletonTheme>
   );
 }
 

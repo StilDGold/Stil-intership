@@ -5,7 +5,7 @@ import Logo from "../images/Ultraverse.png";
 const Footer = () => {
   return (
     <footer className="footer-light">
-      <div className="container">
+      <div data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="400" className="container">
         <div className="row">
           <div className="col-md-3 col-sm-6 col-xs-1">
             <div className="widget">
@@ -151,7 +151,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="subfooter">
+      <div data-aos="zoom-out-right" data-aos-duration="500" data-aos-delay="200" className="subfooter">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
